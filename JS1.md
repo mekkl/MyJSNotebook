@@ -1,21 +1,17 @@
-```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
-```
 
-```typescript
-var s = "TypeScript syntax highlighting";
-alert(s);
-```
+# Table of Contents
+* [Explain and Reflect](#1)
+    * [Java >< JavaScript](#1.1)
+    * [Transpiler/Compiler](#1.2)
+    * [node.js & npm](#1.3)
+    * [Event Loop](#1.4)
+    * [Babel & Webpack](#1.5)
+    * [strict & Linters](#1.6)
+* [Explain using sufficient code](#2)
 
-```
-No language indicated, so no syntax highlighting. 
-But let's throw in a <b>tag</b>.
-```
+# Explain and Reflect: <a id="1"></a>
 
-## Explain and Reflect:
-
-### Explain differences between Java and JavaScript. You should include both topics related to the fact that Java is a compiled language and JavaScript a scripted language, and general differences in language features.
+### Explain differences between Java and JavaScript. You should include both topics related to the fact that Java is a compiled language and JavaScript a scripted language, and general differences in language features. <a id="1.1"></a>
 
 #### Both Can Run in a Browser
 JavaScript runs on most modern browsers, and most websites take advantage of this to enhance the user’s experience. Java applets can also run in a browser, but they have been declining in popularity for various reasons, including compatibility and security. It is reasonable to expect a website visitor to have JavaScript enabled and it is common for a website visitor to have Java applets disabled, especially with the proliferation of mobile browsers.
@@ -47,7 +43,7 @@ The ability to handle the execution of several instruction sequences at the same
 #### Class Based vs Prototype Based. 
 Java follows class based inheritance—a top down, hierarchical, class-based relationship whereby properties are defined in a class and inherited by an instance of that class (one of its members). In JavaScript, inheritance is prototypal—all objects can inherit directly from other objects. Hierarchy is accomplished in JavaScript by assigning an object as a prototype with a constructor function.
 
-### Explain the two strategies for improving JavaScript: ES6 (es2015) + ES7, versus Typescript. What does it require to use these technologies: In our backend with Node and in (many different) Browsers
+### Explain the two strategies for improving JavaScript: ES6 (es2015) + ES7, versus Typescript. What does it require to use these technologies: In our backend with Node and in (many different) Browsers <a id="1.2"></a>
 
 #### Babel is a JavaScript compiler
 Babel is a toolchain that is mainly used to convert ECMAScript 2015+ (ES6+) code into a backwards compatible version of JavaScript in current and older browsers or environments. Here are the main things Babel can do for you:
@@ -59,7 +55,7 @@ Babel is a toolchain that is mainly used to convert ECMAScript 2015+ (ES6+) code
 #### TypeScript
 TypeScript er et programmeringssprog der er en udvidelse af JavaScript, som giver mulighed for at angive typer i koden og definere klasser, interfaces og moduler som det kendes fra sprog som fx C# og java. Det består bl.a. af en compiler der genererer javascript som resultat.
 
-### Explain generally about node.js, when it “makes sense” and npm, and how it “fits” into the node echo system.
+### Explain generally about node.js, when it “makes sense” and npm, and how it “fits” into the node echo system. <a id="1.3"></a>
 
 
 #### Node.js
@@ -92,17 +88,75 @@ It is definitely possible to manually download your libraries, copy them into th
 
 Hopefully this makes it more clear what the purpose of npm is. As a Javascript developer (both client-side and server-side), npm is an indispensable tool in my workflow.
 
-### Explain about the Event Loop in Node.js
-
-### Explain (some) of the purposes with the tools Babel and WebPack, using examples from the exercises
+### Explain about the Event Loop in Node.js <a id="1.4"></a>
 
 
-
-### Explain the purpose of “use strict” and Linters, exemplified with ESLint 
-
+### Explain (some) of the purposes with the tools Babel and WebPack, using examples from the exercises <a id="1.5"></a>
 
 
-## Explain using sufficient code examples the following features in JavaScript. 
+### Explain the purpose of “use strict” and Linters, exemplified with ESLint <a id="1.6"></a>
+
+#### strict
+ECMAScript 5's strict mode is a way to opt in to a restricted variant of JavaScript, thereby implicitly opting-out of "sloppy mode". Strict mode isn't just a subset: it intentionally has different semantics from normal code. Browsers not supporting strict mode will run strict mode code with different behavior from browsers that do, so don't rely on strict mode without feature-testing for support for the relevant aspects of strict mode. Strict mode code and non-strict mode code can coexist, so scripts can opt into strict mode incrementally.
+
+Strict mode makes several changes to normal JavaScript semantics:
+
+1. Eliminates some JavaScript silent errors by changing them to throw errors.
+2. Fixes mistakes that make it difficult for JavaScript engines to perform optimizations: strict mode code can sometimes be made to run faster than identical code that's not strict mode.
+3. Prohibits some syntax likely to be defined in future versions of ECMAScript.
+
+#### Linters
+Linting is the process of checking the source code for Programmatic as well as Stylistic errors. This is most helpful in identifying some common and uncommon mistakes that are made during coding. ESLint, helps developers, when coding by showing typing mistakes, and scoping errors and such, before runtime, and Throw them as errors or underline errors with red. This helps you to remember to define variables, and not trying to do things that are not possible, as setting a variable that is readonly to a new value. It also helps you to not use the reserved keywords of JS as variable names and such.
+
+If you want to make ESLint available to tools that run across all of your projects, we recommend installing ESLint globally. You can do so using npm:
+
+```
+$ npm install -g eslint
+```
+
+You should then setup a configuration file:
+
+```
+$ eslint --init
+```
+
+After that, you can run ESLint on any file or directory like this:
+
+```
+$ eslint yourfile.js
+```
+
+Any plugins or shareable configs that you use must also be installed globally to work with a globally-installed ESLint.
+
+Note: eslint --init is intended for setting up and configuring ESLint on a per-project basis and will perform a local installation of ESLint and its plugins in the directory in which it is run. If you prefer using a global installation of ESLint, any plugins used in your configuration must also be installed globally.
+
+After running eslint --init, you’ll have a .eslintrc file in your directory. In it, you’ll see some rules configured like this:
+
+```javascript
+{
+    "rules": {
+        "semi": ["error", "always"],
+        "quotes": ["error", "double"]
+    }
+}
+```
+
+The names "semi" and "quotes" are the names of rules in ESLint. The first value is the error level of the rule and can be one of these values:
+
+- "off" or 0 - turn the rule off
+- "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
+- "error" or 2 - turn the rule on as an error (exit code will be 1)
+The three error levels allow you fine-grained control over how ESLint applies rules (for more configuration options and details, see the configuration docs).
+
+Your .eslintrc configuration file will also include the line:
+
+```javascript
+"extends": "eslint:recommended"
+```
+
+Because of this line, all of the rules marked “CHECKED” on the [rules page](https://eslint.org/docs/rules/) will be turned on. Alternatively, you can use configurations that others have created by searching for “eslint-config” on [npmjs.com](https://www.npmjs.com/search?q=eslint-config). ESLint will not lint your code unless you extend from a shared configuration or explicitly turn rules on in your configuration.
+
+# Explain using sufficient code examples the following features in JavaScript. <a id="2"></a>
 
 ### Variable/function-Hoisting
 One of the trickier aspects of JavaScript for new JavaScript developers is the fact that variables and functions are "hoisted." Rather than being available after their declaration, they might actually be available beforehand. How does that work? Let's take a look at variable hoisting first.
@@ -187,8 +241,6 @@ var definitionNotHoisted = function () {
 };
 ```
 
-However, __function definition hoisting only occurs for function declarations__, not function expressions. For example:
-
 ### this in JavaScript and how it differs from what we know from Java/.net.
 
 In most cases, the value of __this__ is determined by how a function is called. It can't be set by assignment during execution, and it may be different each time the function is called. ES5 introduced the bind method to set the value of a function's this regardless of how it's called, and ES2015 introduced arrow functions which don't provide their own __this__ binding (it retains the this value of the enclosing lexical context).
@@ -255,8 +307,6 @@ var Module = (function () {
 
 ### Immediately-Invoked Function Expressions (IIFE)
 
-
-
 Now, whether you define a function like function foo(){} or var foo = function(){}, what you end up with is an identifier for a function, that you can invoke by putting parens (parentheses, ()) after it, like foo().
 
 a function statement always starts with the function keyword. Whenever JavaScript sees function keyword as the first word in a valid statement, it expects that a function definition is going to take place. So to stop this from happening, we are prefixing “!” in-front of the function keyword on line 1. This basically enforces JavaScript to treat whatever that’s coming after “!” as an expression.
@@ -287,6 +337,12 @@ Not only IIFEs can return values, but IIFEs can also take arguments while they a
 ```
 
 ### JavaScripts Prototype
+
+The JavaScript prototype property allows you to add new properties to object constructors, The JavaScript prototype property also allows you to add new methods to objects constructors.
+
+    Only modify your own prototypes. Never modify the prototypes of standard JavaScript objects.
+
+Changes to the Object prototype object are seen by all objects through prototype chaining, unless the properties and methods subject to those changes are overridden further along the prototype chain.  This provides a very powerful although potentially dangerous mechanism to override or extend object behavior.
 
 ### User defined Callback Functions (writing your own functions that takes a callback)
 
