@@ -1,13 +1,23 @@
 
 # Table of Contents
-* [Explain and Reflect](#1)
-    * [Java >< JavaScript](#1.1)
-    * [Transpiler/Compiler](#1.2)
-    * [node.js & npm](#1.3)
-    * [Event Loop](#1.4)
-    * [Babel & Webpack](#1.5)
-    * [strict & Linters](#1.6)
-* [Explain using sufficient code](#2)
+1. [Explain and Reflect](#1)
+    * [1.1. Java >< JavaScript](#1.1)
+    * [1.2 Transpiler/Compiler](#1.2)
+    * [1.3. node.js & npm](#1.3)
+    * [1.4. Event Loop](#1.4)
+    * [1.5. Babel & Webpack](#1.5)
+    * [1.6. strict & Linters](#1.6)
+2. [Explain using sufficient code](#2)
+    * [2.1. Hoisting](#2.1)
+    * [2.2. this](#2.2)
+    * [2.3. Closures & Module Pattern](#2.3)
+    * [2.4. Immediately-Invoked Function Expressions](#2.4)
+    * [2.5. Prototype](#2.5)
+    * [2.6. Callbacks](#2.6)
+    * [2.7. map, filter & reduce](#2.7)    
+    * [2.8. User defined reusable modules](#2.8)     
+3. [ES6, ES7 & TypeScript](#3)   
+
 
 # Explain and Reflect: <a id="1"></a>
 
@@ -158,7 +168,7 @@ Because of this line, all of the rules marked “CHECKED” on the [rules page](
 
 # Explain using sufficient code examples the following features in JavaScript. <a id="2"></a>
 
-### Variable/function-Hoisting
+### Variable/function-Hoisting <a id="2.1"></a>
 One of the trickier aspects of JavaScript for new JavaScript developers is the fact that variables and functions are "hoisted." Rather than being available after their declaration, they might actually be available beforehand. How does that work? Let's take a look at variable hoisting first.
 
 ```javascript
@@ -241,11 +251,11 @@ var definitionNotHoisted = function () {
 };
 ```
 
-### this in JavaScript and how it differs from what we know from Java/.net.
+### this in JavaScript and how it differs from what we know from Java/.net. <a id="2.2"></a>
 
 In most cases, the value of __this__ is determined by how a function is called. It can't be set by assignment during execution, and it may be different each time the function is called. ES5 introduced the bind method to set the value of a function's this regardless of how it's called, and ES2015 introduced arrow functions which don't provide their own __this__ binding (it retains the this value of the enclosing lexical context).
 
-### Function Closures and the JavaScript Module Pattern
+### Function Closures and the JavaScript Module Pattern <a id="2.3"></a>
 
 #### Function Closures
 JavaScript variables can belong to the __local__ or __global__ scope. Global variables can be made local (private) with closures.
@@ -305,7 +315,7 @@ var Module = (function () {
 })();
 ```
 
-### Immediately-Invoked Function Expressions (IIFE)
+### Immediately-Invoked Function Expressions (IIFE) <a id="2.4"></a>
 
 Now, whether you define a function like function foo(){} or var foo = function(){}, what you end up with is an identifier for a function, that you can invoke by putting parens (parentheses, ()) after it, like foo().
 
@@ -336,7 +346,7 @@ Not only IIFEs can return values, but IIFEs can also take arguments while they a
 }("Hello!", 5));
 ```
 
-### JavaScripts Prototype
+### JavaScripts Prototype <a id="2.5"></a>
 
 The JavaScript prototype property allows you to add new properties to object constructors, The JavaScript prototype property also allows you to add new methods to objects constructors.
 
@@ -344,14 +354,23 @@ The JavaScript prototype property allows you to add new properties to object con
 
 Changes to the Object prototype object are seen by all objects through prototype chaining, unless the properties and methods subject to those changes are overridden further along the prototype chain.  This provides a very powerful although potentially dangerous mechanism to override or extend object behavior.
 
-### User defined Callback Functions (writing your own functions that takes a callback)
+### User defined Callback Functions (writing your own functions that takes a callback) <a id="2.6"></a>
 
-### Explain the methods map, filter and reduce
+In JavaScript, functions are first-class objects; that is, functions are of the type Object and they can be used in a first-class manner like any other object (String, Array, Number, etc.) since they are in fact objects themselves. They can be “stored in variables, passed as arguments to functions, created within functions, and returned from functions”
 
-### Provide examples of user defined reusable modules implemented in Node.js
+Because functions are first-class objects, we can pass a function as an argument in another function and later execute that passed-in function or even return it to be executed later. This is the essence of using callback functions in JavaScript.
 
+Callback functions are derived from a programming paradigm known as functional programming. At a fundamental level, functional programming specifies the use of functions as arguments. Functional programming was—and still is, though to a much lesser extent today—seen as an esoteric technique of specially trained, master programmers.
 
-## ES6-7 and TypeScript
+A callback function, also known as a higher-order function, is a function that is passed to another function (let’s call this other function “otherFunction”) as a parameter, and the callback function is called (or executed) inside the otherFunction. A callback function is essentially a pattern (an established solution to a common problem), and therefore, the use of a callback function is also known as a callback pattern.
+
+We can pass functions around like variables and return them in functions and use them in other functions. When we pass a callback function as an argument to another function, we are only passing the function definition. We are not executing the function in the parameter. In other words, we aren’t passing the function with the trailing pair of executing parenthesis () like we do when we are executing a function.
+
+### Explain the methods map, filter and reduce <a id="2.7"></a>
+
+### Provide examples of user defined reusable modules implemented in Node.js <a id="2.8"></a>
+
+# ES6-7 and TypeScript <a id="3"></a>
 
 ### Provide examples and explain the es2015 features: let, arrow functions, this, rest parameters, de-structuring assignments, maps/sets etc.
 
@@ -362,11 +381,103 @@ Changes to the Object prototype object are seen by all objects through prototype
 
 ### Provide an number of examples to demonstrate the benefits of using TypeScript, including, types, interfaces, classes and generics
 
-## Callbacks, Promises and async/await
+# Callbacks, Promises and async/await <a id="4"></a>
 
 ### Explain about promises in ES-6 including, the problems they solve, a quick explanation of the Promise API and:
 
+A JavaScript Promise represents the result of an operation that hasn't been completed yet, but will at some undetermined point in the future. An example of such an operation is a network request. When we fetch data from some source, for example an API, there is no way for us to absolutely determine when the response will be received.
+
+This can be problematic if we have other operations dependent on the completion of this network request. Without Promises, we would have to use callbacks to deal with actions that need to happen in sequence. This isn't necessarily a problem if we only have one asynchronous action. But if we need to complete multiple asynchronous steps in sequence, callbacks become unmanageable and result in the infamous callback hell.
+
+A Promise is created using the Promise Constructor. This accepts a function with two arguments (resolve & reject) as its only parameter.
+
+```javascript
+var promise = new Promise( function(resolve, reject) { /* Promise content */ } )
+```
+
+![](https://bitsofco.de/content/images/2016/06/Creating-Promises.png)
+
+Within the function, we can execute whatever asynchronous task we want. To mark the promise as __fulfilled__, we call __resolve()__, optionally passing a value we want to return. To mark the promise as __rejected__ or failed, we call __reject()__, optionally passing an error message. Before a promise is fulfilled or rejected, it is in a __pending state__.
+
+Once we have created the Promise, we need to actually use it. To execute the promise-ified function, we can call it like any regular function. But, because it is a promise, we now have access to the .then() method, which we can append to the function and which will be executed when the Promise is no longer pending.
+
+The .then()method accepts two optional parameters. First, a function called if the promise is fulfilled. Second, a function called if the promise is rejected.
+
+```javascript
+get(url)
+.then(function(response) {
+    /* successFunction */
+}, function(err) {
+    /* errorFunction */
+})
+```
+
+![](https://bitsofco.de/content/images/2016/06/Using-Promises.png)
+
+![](https://bitsofco.de/content/images/2016/07/Chaining-Copy-1.png)
+
+
+
+#### Promises in parallel
+
+There may be cases where we want to execute a bunch of promise-ified functions in parallel, and then perform an action only when all the promises have been fulfilled. For example, if we want to fetch a bunch of images and display them on the page.
+
+To do this, we need to make use of two methods. First, the Array.map() method allows us to perform an action on each item in an array, and creates a new array of the results of these actions.
+
+Second, the Promise.all() method returns a promise that is only resolved when every promise within an array is resolved. If any single promise within the array is rejected, the Promise.all() promise is also rejected.
+
+```javascript
+var arrayOfURLs = ['one.json', 'two.json', 'three.json', 'four.json'];
+var arrayOfPromises = arrayOfURLs.map(get);
+
+Promise.all(arrayOfPromises)
+.then(function(arrayOfResults) {
+    /* Do something when all Promises are resolved */
+})
+.catch(function(err) {
+    /* Handle error is any of Promises fails */
+})
+```
+
+![](https://bitsofco.de/content/images/2016/06/Parallel-.png)
+
 #### Example(s) that demonstrate how to avoid the callback hell  (“Pyramid of Doom")
+
+Using Promises to avoid the Pyramid of Doom:
+
+Without Promises:
+
+```javascript
+doSomething(function(responseOne) {
+    doSomethingElse(responseOne, function(responseTwo, err) {
+        if (err) { handleError(err); }
+        doMoreStuff(responseTwo, function(responseThree, err) {
+            if (err) { handleAnotherError(err); }
+            doFinalThing(responseThree, function(err) {
+                if (err) { handleAnotherError(err); }
+                // Complete
+            }); // end doFinalThing
+        }); // end doMoreStuff
+    }); // end doSomethingElse
+}); // end doSomething
+```
+With Promises:
+
+```javascript
+doSomething()
+.then(doSomethingElse)
+.catch(handleError)
+.then(doMoreStuff)
+.then(doFinalThing)
+.catch(handleAnotherError)
+```
+
+
+Name your functions and declare them and pass just the name of the function as the callback, instead of defining an anonymous function in the parameter of the main function:
+
+
+
+Modularity: Separate your code into modules, so you can export a section of code that does a particular job. Then you can import that module into your larger application:
 
 #### Example(s) that demonstrate how to execute asynchronous (promise-based) code in serial or parallel
 
@@ -379,7 +490,7 @@ Changes to the Object prototype object are seen by all objects through prototype
 #### async
 The async function declaration defines an asynchronous function, which returns an AsyncFunction object. An asynchronous function is a function which operates asynchronously via the event loop, using an implicit Promise to return its result. But the syntax and structure of your code using async functions is much more like using standard synchronous functions.
 
-#### Promise
+#### await
 The await expression causes async function execution to pause until a Promise is resolved, that is fulfilled or rejected, and to resume execution of the async function after fulfillment. When resumed, the value of the await expression is that of the fulfilled Promise.
 
 If the Promise is rejected, the await expression throws the rejected value.
