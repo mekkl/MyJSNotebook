@@ -16,59 +16,71 @@
     * [2.6. Callbacks](#2.6)
     * [2.7. map, filter & reduce](#2.7)    
     * [2.8. User defined reusable modules](#2.8)     
-3. [ES6, ES7 & TypeScript](#3)   
+3. [ES6, ES7 & TypeScript](#3)  
+    * [3.1. es2015 features](#3.1)
+    * [3.2. es2015 modules](#3.2)
+    * [3.3. inheritance](#3.3)
+    * [3.4. es2016 with Babel & Webpack](#3.4)
+    * [3.5. Typescript features](#3.5)
+4. [Callbacks, Promises & async/await](#4) 
+    * [4.1. Promises](#4.1)
+    * [4.2. async/await](#4.2)
+
+
+
+
 
 
 # Explain and Reflect: <a id="1"></a>
 
-### Explain differences between Java and JavaScript. You should include both topics related to the fact that Java is a compiled language and JavaScript a scripted language, and general differences in language features. <a id="1.1"></a>
+## Explain differences between Java and JavaScript. You should include both topics related to the fact that Java is a compiled language and JavaScript a scripted language, and general differences in language features. <a id="1.1"></a>
 
-#### Both Can Run in a Browser
+### Both Can Run in a Browser
 JavaScript runs on most modern browsers, and most websites take advantage of this to enhance the user’s experience. Java applets can also run in a browser, but they have been declining in popularity for various reasons, including compatibility and security. It is reasonable to expect a website visitor to have JavaScript enabled and it is common for a website visitor to have Java applets disabled, especially with the proliferation of mobile browsers.
 
-#### Both Can Run on a Server
+### Both Can Run on a Server
 Java has long been a major workhorse of the web with application servers like WebSphere, JBoss, and Apache Tomcat running a large portion of the web applications seen by users on both public sites and behind corporate firewalls. While JavaScript has dabbled in the server-side realm for a while, the recent popularity of Node.js is causing more JavaScript-powered application servers to pop up all over the place.
 
-#### Compiled vs. Interpreted
+### Compiled vs. Interpreted
 Java code is typically written in an Integrated Development Environment (IDE) and compiled into bytecode. This bytecode is not readable by humans and any Java Virtual Machine (JVM) should be able to run it. JavaScript code is normally executed by a JavaScript engine in the same syntax in which it is written, although JavaScript files that are sent over the internet are often compressed into a barely readable format to reduce their size. Making changes in Java application environments can require several steps using specialized software to compile and deploy the changes, while making changes to JavaScript can sometimes be done with just a simple text editor.
 
-#### Both Are Influenced by the Programming Community
+### Both Are Influenced by the Programming Community
 Java uses the Java Community Process to accept input on what to include in the language in the form of Java Specification Requests. Oracle, the current owner of Java, uses these to determine the official implementation of the language. JavaScript, on the other hand, is a derivative of ECMAScript which is defined by the European Computer Manufacturers Association (ECMA), a non-profit standards organization. Without open processes like these, programming languages have a tendency to become obsolete and more proprietary, thus creating vendor lock-in to an inferior product.
 
-#### Write-once, Run-anywhere vs. Branching Madness
+### Write-once, Run-anywhere vs. Branching Madness
 Java is specifically designed to enable developers to write their code once and deploy it to any operating system without making changes. In general, this does work as designed, although sometimes there are hiccups depending on the JVM and the code used. Although JavaScript has a standard through ECMAScript, it is much more susceptible to the differences in execution environments (normally in the form of different browsers). While it is very frustrating for developers to write JavaScript code for different environments, one silver lining is that the program itself can query the environment to decide what branch of code to run for that specific environment.
 
-#### Two-Stage vs. Runtime-only Debugging
+### Two-Stage vs. Runtime-only Debugging
 Java is compiled before it can be run, so if there are any structural problems with code they become apparent very quickly. Once it is running, IDEs often enable the developer to attach to the JVM to debug in real-time. JavaScript is not compiled in the same way, so all bugs are found at runtime. As such, the debugging capabilities of JavaScript are highly dependent on the execution environment and this can vary quite a bit.
 
-#### Both Have Libraries and Frameworks
+### Both Have Libraries and Frameworks
 Libraries and frameworks help programmers by providing access to general and purpose-specific code that can be reused over and over again for different products. When used properly, libraries and frameworks can cut development time – sometimes by a very significant factor. Both Java and JavaScript are mature enough to have a wide range of library and framework options available to assist developers in a variety of scenarios.
 
-#### Static vs Dynamic Type Checking. 
+### Static vs Dynamic Type Checking. 
 Java uses static type checking, where the type of a variable is checked at compile-time. The programmer must specify the type (integer, double, string, etc.) of any variable they create. JavaScript, like most scripting languages, uses dynamic typing, where type safety is verified at runtime. It is not required for a programmer to specify the type of any variable they create. There are many pros and cons for these two paradigms, but the primary advantage of static type checking is that type errors are caught early in development, and because the compiler knows exactly what data types are being used, code typically executes faster or uses less memory. The primary advantage of dynamic type checking is programmer productivity—you are free to assign types at your leisure.
 
-#### Concurrency. 
+### Concurrency. 
 The ability to handle the execution of several instruction sequences at the same time is handled very differently between Java and JavaScript. Java makes use of multiple threads to perform tasks in parallel. JavaScript, particularly as it exists as Node.js in server-side applications, handles concurrency on one main thread of execution via a queue system called the event loop, and a forking system called Node Clustering. For most use-cases, both methods work just fine, but Java is generally faster because thread to thread memory sharing much faster than interprocess communication (IPC).
 
-#### Class Based vs Prototype Based. 
+### Class Based vs Prototype Based. 
 Java follows class based inheritance—a top down, hierarchical, class-based relationship whereby properties are defined in a class and inherited by an instance of that class (one of its members). In JavaScript, inheritance is prototypal—all objects can inherit directly from other objects. Hierarchy is accomplished in JavaScript by assigning an object as a prototype with a constructor function.
 
-### Explain the two strategies for improving JavaScript: ES6 (es2015) + ES7, versus Typescript. What does it require to use these technologies: In our backend with Node and in (many different) Browsers <a id="1.2"></a>
+## Explain the two strategies for improving JavaScript: ES6 (es2015) + ES7, versus Typescript. What does it require to use these technologies: In our backend with Node and in (many different) Browsers <a id="1.2"></a>
 
-#### Babel is a JavaScript compiler
+### Babel is a JavaScript compiler
 Babel is a toolchain that is mainly used to convert ECMAScript 2015+ (ES6+) code into a backwards compatible version of JavaScript in current and older browsers or environments. Here are the main things Babel can do for you:
 - Transform syntax
 - Polyfill features that are missing in your target environment (through @babel/polyfill)
 - Source code transformations (codemods)
 - And more! (check out these videos for inspiration)
 
-#### TypeScript
+### TypeScript
 TypeScript er et programmeringssprog der er en udvidelse af JavaScript, som giver mulighed for at angive typer i koden og definere klasser, interfaces og moduler som det kendes fra sprog som fx C# og java. Det består bl.a. af en compiler der genererer javascript som resultat.
 
-### Explain generally about node.js, when it “makes sense” and npm, and how it “fits” into the node echo system. <a id="1.3"></a>
+## Explain generally about node.js, when it “makes sense” and npm, and how it “fits” into the node echo system. <a id="1.3"></a>
 
 
-#### Node.js
+### Node.js
 Node.js is a JavaScript run-time environment. Sounds great, but what does that mean? How does that work?
 
 The Node run-time environment includes everything you need to execute a program written in JavaScript.
@@ -89,7 +101,7 @@ Using a non-blocking request, you can initiate a data request for user2 without 
 
 This non-blocking I/O eliminates the need for multi-threading, since the server can handle multiple requests at the same time.
 
-#### npm
+### npm
 npm is a package manager for Node.js with hundreds of thousands of packages. Although it does create some of your directory structure/organization, this is not the main purpose.
 
 The main goal, as you touched upon, is automated dependency and package management. This means that you can specify all of your project's dependencies inside your package.json file, then any time you (or anyone else) needs to get started with your project they can just run npm install and immediately have all of the dependencies installed. On top of this, it is also possible to specify what versions your project depends upon to prevent updates from breaking your project.
@@ -98,15 +110,15 @@ It is definitely possible to manually download your libraries, copy them into th
 
 Hopefully this makes it more clear what the purpose of npm is. As a Javascript developer (both client-side and server-side), npm is an indispensable tool in my workflow.
 
-### Explain about the Event Loop in Node.js <a id="1.4"></a>
+## Explain about the Event Loop in Node.js <a id="1.4"></a>
 
 
-### Explain (some) of the purposes with the tools Babel and WebPack, using examples from the exercises <a id="1.5"></a>
+## Explain (some) of the purposes with the tools Babel and WebPack, using examples from the exercises <a id="1.5"></a>
 
 
-### Explain the purpose of “use strict” and Linters, exemplified with ESLint <a id="1.6"></a>
+## Explain the purpose of “use strict” and Linters, exemplified with ESLint <a id="1.6"></a>
 
-#### strict
+### strict
 ECMAScript 5's strict mode is a way to opt in to a restricted variant of JavaScript, thereby implicitly opting-out of "sloppy mode". Strict mode isn't just a subset: it intentionally has different semantics from normal code. Browsers not supporting strict mode will run strict mode code with different behavior from browsers that do, so don't rely on strict mode without feature-testing for support for the relevant aspects of strict mode. Strict mode code and non-strict mode code can coexist, so scripts can opt into strict mode incrementally.
 
 Strict mode makes several changes to normal JavaScript semantics:
@@ -115,7 +127,7 @@ Strict mode makes several changes to normal JavaScript semantics:
 2. Fixes mistakes that make it difficult for JavaScript engines to perform optimizations: strict mode code can sometimes be made to run faster than identical code that's not strict mode.
 3. Prohibits some syntax likely to be defined in future versions of ECMAScript.
 
-#### Linters
+### Linters
 Linting is the process of checking the source code for Programmatic as well as Stylistic errors. This is most helpful in identifying some common and uncommon mistakes that are made during coding. ESLint, helps developers, when coding by showing typing mistakes, and scoping errors and such, before runtime, and Throw them as errors or underline errors with red. This helps you to remember to define variables, and not trying to do things that are not possible, as setting a variable that is readonly to a new value. It also helps you to not use the reserved keywords of JS as variable names and such.
 
 If you want to make ESLint available to tools that run across all of your projects, we recommend installing ESLint globally. You can do so using npm:
@@ -168,7 +180,7 @@ Because of this line, all of the rules marked “CHECKED” on the [rules page](
 
 # Explain using sufficient code examples the following features in JavaScript. <a id="2"></a>
 
-### Variable/function-Hoisting <a id="2.1"></a>
+## Variable/function-Hoisting <a id="2.1"></a>
 One of the trickier aspects of JavaScript for new JavaScript developers is the fact that variables and functions are "hoisted." Rather than being available after their declaration, they might actually be available beforehand. How does that work? Let's take a look at variable hoisting first.
 
 ```javascript
@@ -251,13 +263,13 @@ var definitionNotHoisted = function () {
 };
 ```
 
-### this in JavaScript and how it differs from what we know from Java/.net. <a id="2.2"></a>
+## this in JavaScript and how it differs from what we know from Java/.net. <a id="2.2"></a>
 
 In most cases, the value of __this__ is determined by how a function is called. It can't be set by assignment during execution, and it may be different each time the function is called. ES5 introduced the bind method to set the value of a function's this regardless of how it's called, and ES2015 introduced arrow functions which don't provide their own __this__ binding (it retains the this value of the enclosing lexical context).
 
-### Function Closures and the JavaScript Module Pattern <a id="2.3"></a>
+## Function Closures and the JavaScript Module Pattern <a id="2.3"></a>
 
-#### Function Closures
+### Function Closures
 JavaScript variables can belong to the __local__ or __global__ scope. Global variables can be made local (private) with closures.
 
 A function can access all variables defined inside the function, like this:
@@ -290,7 +302,7 @@ function myFunction() {
 console.log(a)
 
 ```
-#### JavaScript Module Pattern
+### JavaScript Module Pattern
 JavaScript doesn’t have privacy, but creating new scope emulates this when we wrap all our function logic inside them. The idea then is to return only the parts we need, leaving the other code out of the global scope.
 
 After creating new scope, we need to namespace our code so that we can access any methods we return. Let’s create a namespace for our anonymous Module.
@@ -315,7 +327,7 @@ var Module = (function () {
 })();
 ```
 
-### Immediately-Invoked Function Expressions (IIFE) <a id="2.4"></a>
+## Immediately-Invoked Function Expressions (IIFE) <a id="2.4"></a>
 
 Now, whether you define a function like function foo(){} or var foo = function(){}, what you end up with is an identifier for a function, that you can invoke by putting parens (parentheses, ()) after it, like foo().
 
@@ -346,7 +358,7 @@ Not only IIFEs can return values, but IIFEs can also take arguments while they a
 }("Hello!", 5));
 ```
 
-### JavaScripts Prototype <a id="2.5"></a>
+## JavaScripts Prototype <a id="2.5"></a>
 
 The JavaScript prototype property allows you to add new properties to object constructors, The JavaScript prototype property also allows you to add new methods to objects constructors.
 
@@ -354,7 +366,7 @@ The JavaScript prototype property allows you to add new properties to object con
 
 Changes to the Object prototype object are seen by all objects through prototype chaining, unless the properties and methods subject to those changes are overridden further along the prototype chain.  This provides a very powerful although potentially dangerous mechanism to override or extend object behavior.
 
-### User defined Callback Functions (writing your own functions that takes a callback) <a id="2.6"></a>
+## User defined Callback Functions (writing your own functions that takes a callback) <a id="2.6"></a>
 
 In JavaScript, functions are first-class objects; that is, functions are of the type Object and they can be used in a first-class manner like any other object (String, Array, Number, etc.) since they are in fact objects themselves. They can be “stored in variables, passed as arguments to functions, created within functions, and returned from functions”
 
@@ -366,24 +378,25 @@ A callback function, also known as a higher-order function, is a function that i
 
 We can pass functions around like variables and return them in functions and use them in other functions. When we pass a callback function as an argument to another function, we are only passing the function definition. We are not executing the function in the parameter. In other words, we aren’t passing the function with the trailing pair of executing parenthesis () like we do when we are executing a function.
 
-### Explain the methods map, filter and reduce <a id="2.7"></a>
+## Explain the methods map, filter and reduce <a id="2.7"></a>
 
-### Provide examples of user defined reusable modules implemented in Node.js <a id="2.8"></a>
+## Provide examples of user defined reusable modules implemented in Node.js <a id="2.8"></a>
 
 # ES6-7 and TypeScript <a id="3"></a>
 
-### Provide examples and explain the es2015 features: let, arrow functions, this, rest parameters, de-structuring assignments, maps/sets etc.
+## Provide examples and explain the es2015 features: let, arrow functions, this, rest parameters, de-structuring assignments, maps/sets etc. <a id="3.1"></a>
 
-### Explain and demonstrate how es2015 supports modules (import and export) similar to what is offered by NodeJS.
+## Explain and demonstrate how es2015 supports modules (import and export) similar to what is offered by NodeJS. <a id="3.2"></a>
 
-### Provide an example of ES6 inheritance and reflect over the differences between Inheritance in Java and in ES6.
-### Provide examples with es6, running in a browser, using Babel and Webpack
+## Provide an example of ES6 inheritance and reflect over the differences between Inheritance in Java and in ES6. <a id="3.3"></a>
 
-### Provide an number of examples to demonstrate the benefits of using TypeScript, including, types, interfaces, classes and generics
+## Provide examples with es6, running in a browser, using Babel and Webpack <a id="3.4"></a>
+
+## Provide an number of examples to demonstrate the benefits of using TypeScript, including, types, interfaces, classes and generics <a id="3.5"></a>
 
 # Callbacks, Promises and async/await <a id="4"></a>
 
-### Explain about promises in ES-6 including, the problems they solve, a quick explanation of the Promise API and:
+## Explain about promises in ES-6 including, the problems they solve, a quick explanation of the Promise API: <a id="4.1"></a>
 
 A JavaScript Promise represents the result of an operation that hasn't been completed yet, but will at some undetermined point in the future. An example of such an operation is a network request. When we fetch data from some source, for example an API, there is no way for us to absolutely determine when the response will be received.
 
@@ -417,31 +430,7 @@ get(url)
 ![](https://bitsofco.de/content/images/2016/07/Chaining-Copy-1.png)
 
 
-
-#### Promises in parallel
-
-There may be cases where we want to execute a bunch of promise-ified functions in parallel, and then perform an action only when all the promises have been fulfilled. For example, if we want to fetch a bunch of images and display them on the page.
-
-To do this, we need to make use of two methods. First, the Array.map() method allows us to perform an action on each item in an array, and creates a new array of the results of these actions.
-
-Second, the Promise.all() method returns a promise that is only resolved when every promise within an array is resolved. If any single promise within the array is rejected, the Promise.all() promise is also rejected.
-
-```javascript
-var arrayOfURLs = ['one.json', 'two.json', 'three.json', 'four.json'];
-var arrayOfPromises = arrayOfURLs.map(get);
-
-Promise.all(arrayOfPromises)
-.then(function(arrayOfResults) {
-    /* Do something when all Promises are resolved */
-})
-.catch(function(err) {
-    /* Handle error is any of Promises fails */
-})
-```
-
-![](https://bitsofco.de/content/images/2016/06/Parallel-.png)
-
-#### Example(s) that demonstrate how to avoid the callback hell  (“Pyramid of Doom")
+### Example(s) that demonstrate how to avoid the callback hell  (“Pyramid of Doom")
 
 Using Promises to avoid the Pyramid of Doom:
 
@@ -479,25 +468,72 @@ Name your functions and declare them and pass just the name of the function as t
 
 Modularity: Separate your code into modules, so you can export a section of code that does a particular job. Then you can import that module into your larger application:
 
-#### Example(s) that demonstrate how to execute asynchronous (promise-based) code in serial or parallel
+### Example(s) that demonstrate how to execute asynchronous (promise-based) code in serial or parallel
 
-#### Example(s) that demonstrate how to implement our own promise-solutions.
+There may be cases where we want to execute a bunch of promise-ified functions in parallel, and then perform an action only when all the promises have been fulfilled. For example, if we want to fetch a bunch of images and display them on the page.
 
-#### Example(s) that demonstrate error handling with promises
+To do this, we need to make use of two methods. First, the Array.map() method allows us to perform an action on each item in an array, and creates a new array of the results of these actions.
 
-### Explain about JavaScripts async/await, how it relates to promises and reasons to use it compared to the plain promise API.
+Second, the Promise.all() method returns a promise that is only resolved when every promise within an array is resolved. If any single promise within the array is rejected, the Promise.all() promise is also rejected.
 
-#### async
+```javascript
+var arrayOfURLs = ['one.json', 'two.json', 'three.json', 'four.json'];
+var arrayOfPromises = arrayOfURLs.map(get);
+
+Promise.all(arrayOfPromises)
+.then(function(arrayOfResults) {
+    /* Do something when all Promises are resolved */
+})
+.catch(function(err) {
+    /* Handle error is any of Promises fails */
+})
+```
+
+![](https://bitsofco.de/content/images/2016/06/Parallel-.png)
+
+### Example(s) that demonstrate how to implement our own promise-solutions.
+
+### Example(s) that demonstrate error handling with promises
+
+Since both the success and error functions are optional, we can split them into two .then()s for better readability.
+
+```javascript
+get(url)
+.then(function(response) {
+    /* successFunction */
+}, undefined)
+.then(undefined, function(err) {
+    /* errorFunction */
+})
+```
+
+To make things even more readable, we make use of the .catch() method, which is a shorthand for a .then(undefined, errorFunction).
+
+```javascript
+get(url)
+.then(function(response) {
+    /* successFunction */
+})
+.catch(function(err) {
+    /* errorFunction */
+})
+```
+
+![](https://bitsofco.de/content/images/2016/06/Error-Handling.png)
+
+## Explain about JavaScripts async/await, how it relates to promises and reasons to use it compared to the plain promise API. <a id="4.2"></a>
+
+### async
 The async function declaration defines an asynchronous function, which returns an AsyncFunction object. An asynchronous function is a function which operates asynchronously via the event loop, using an implicit Promise to return its result. But the syntax and structure of your code using async functions is much more like using standard synchronous functions.
 
-#### await
+### await
 The await expression causes async function execution to pause until a Promise is resolved, that is fulfilled or rejected, and to resume execution of the async function after fulfillment. When resumed, the value of the await expression is that of the fulfilled Promise.
 
 If the Promise is rejected, the await expression throws the rejected value.
 
 If the value of the expression following the await operator is not a Promise, it's converted to a resolved Promise.
 
-#### Why to use it
+### Why to use it
 __Error handling__: Async/await makes it finally possible to handle both synchronous and asynchronous errors with the same construct, good old try/catch.
 
 __Error stacks__: The error stack returned from a promise chain gives no clue of where the error happened. Even worse, it’s misleading; the only function name it contains is callAPromise which is totally innocent of this error (the file and line number are still useful though).
@@ -538,9 +574,9 @@ __Debugging__, a killer advantage when using async/await is that it’s much eas
 With async/await you don’t need arrow functions as much, and you can step through await calls exactly as if they were normal synchronous calls.
 
 
-#### Provide examples to demonstrate why this often is the preferred way of handling promises
+### Provide examples to demonstrate why this often is the preferred way of handling promises
 
-#### Error handling with async/await
+### Error handling with async/await
 
 ```javascript
 const makeRequest = async () => {
@@ -554,7 +590,7 @@ const makeRequest = async () => {
 }
 ```
 
-#### Serial or parallel execution with async/await.
+### Serial or parallel execution with async/await.
 
 ```javascript
 async function serial(count) {
